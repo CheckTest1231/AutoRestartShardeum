@@ -32,10 +32,6 @@ if [ -n "$result" ]; then
         docker exec shardeum-dashboard operator-cli start
     fi
 fi
-
-# Додавання задачі крону для запуску скрипта кожні 5 хв
-(crontab -l ; echo "*/5 * * * * /bin/bash $HOME/AutoRestartShardeum/AutoRestart.sh") | crontab -
-
 # Почекати трохи, щоб зміни відобразилися
 sleep 3
 
