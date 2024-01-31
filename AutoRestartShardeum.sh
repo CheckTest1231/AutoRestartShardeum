@@ -9,6 +9,9 @@ execute_and_log() {
     # Виконати команду та отримати її результат
     result=$(docker exec shardeum-dashboard operator-cli status | grep -oP 'state:\s*\K\w+')
     
+    # Затримка в 3 секунди
+    sleep 3
+    
     # Перевірити, чи є результат виводу команди
     if [ -n "$result" ]; then
         # Записати результат у файл разом з українським часом
