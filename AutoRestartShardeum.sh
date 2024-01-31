@@ -10,7 +10,7 @@ mkdir -p "$HOME/AutoRestartShardeum"
 cd "$HOME/.shardeum" || exit
 
 # Виклик команди через shell.sh та запис результатів
-sudo ./shell.sh > "$HOME/AutoRestartShardeum/status.txt"
+./shell.sh > "$HOME/AutoRestartShardeum/status.txt"
 
 # Перевірка результатів та виконання необхідних дій
 status=$(awk '/state:/ {print $2}' "$HOME/AutoRestartShardeum/status.txt")
@@ -21,6 +21,6 @@ echo "$datetime Status: $status" >> "$HOME/AutoRestartShardeum/LogInfo.txt"
 
 # Перевірка, чи значення статусу "stopped", і виконання команди
 if [ "$status" = "stopped" ]; then
-    sudo "$OPERATOR_CLI" start
+    "$OPERATOR_CLI" start
     echo "$datetime Restarted Sharduem" >> "$HOME/AutoRestartShardeum/LogAutoRestart.txt"
 fi
