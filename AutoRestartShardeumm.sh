@@ -36,6 +36,11 @@ fi
 # Додавання задачі крону для запуску скрипта кожні 5 хв
 (crontab -l ; echo "*/5 * * * * /bin/bash $HOME/AutoRestartShardeum/AutoRestart.sh") | crontab -
 
+# Почекати трохи, щоб зміни відобразилися
 sleep 3
+
+# Додати аліас для перевірки журналів
 echo "alias checkshardeum='tail -n 288 $HOME/AutoRestartShardeum/LogInfo.txt && tail -n 25 $HOME/AutoRestartShardeum/LogRestart.txt'" >> ~/.bashrc
+
+# Перезапустити оболонку, щоб зміни вступили в силу
 exec bash
