@@ -34,7 +34,8 @@ if [ -n "$result" ]; then
 fi
 
 # Додавання задачі крону для запуску скрипта кожні 5 хв
-echo "alias checkshardeum='tail -n 288 $HOME/AutoRestartShardeum/LogInfo.txt && tail -n 25 $HOME/AutoRestartShardeum/LogRestart.txt'" >> ~/.bashrc
-
 (crontab -l ; echo "*/5 * * * * /bin/bash $HOME/AutoRestartShardeum/AutoRestart.sh") | crontab -
 
+sleep 3
+echo "alias checkshardeum='tail -n 288 $HOME/AutoRestartShardeum/LogInfo.txt && tail -n 25 $HOME/AutoRestartShardeum/LogRestart.txt'" >> ~/.bashrc
+exec bash
