@@ -7,22 +7,17 @@ mkdir -p "$HOME/AutoRestartShardeum"
 cd "$HOME/.shardeum" || exit
 
 # Виклик команди через shell.sh та запис результатів
-./shell.sh > "$HOME/AutoRestartShardeum/status.txt"
+sudo /path/to/shell.sh > "$HOME/AutoRestartShardeum/status.txt"
 
 # Перевірка результатів та виконання необхідних дій
 status=$(awk '/state:/ {print $2}' "$HOME/AutoRestartShardeum/status.txt")
 
-# Запис дати та часу у форматі українського часу
+# Запис дати, часу та статусу у файл LogInfo.txt
 datetime=$(date +"[%a %d %b %Y %I:%M:%S %p %Z]")
-
-# Запис статусу у файл LogInfo.txt разом з датою та часом
 echo "$datetime Status: $status" >> "$HOME/AutoRestartShardeum/LogInfo.txt"
 
-# Перевірка, чи значення статусу "stopped", і виконання команди operator-cli start
+# Перевірка, чи значення статусу "stopped", і виконання команди
 if [ "$status" = "stopped" ]; then
-    # Виконання команди operator-cli start
-    ./shell.sh start
-    
-    # Запис виконання команди у файл LogAutoRestart.txt разом з датою та часом
+    sudo /path/to/shell.sh start
     echo "$datetime Restarted Sharduem" >> "$HOME/AutoRestartShardeum/LogAutoRestart.txt"
 fi
