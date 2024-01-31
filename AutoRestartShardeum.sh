@@ -11,6 +11,9 @@ cd $HOME/.shardeum
     # Виконання shell.sh
     ./shell.sh
     
+    # Затримка 5 секунд перед отриманням статусу
+    sleep 5
+    
     # Виконання operator-cli status та зчитування значення "state"
     status=$(operator-cli status | grep "state:" | awk '{print $2}')
     
