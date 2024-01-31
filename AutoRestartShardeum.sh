@@ -17,8 +17,14 @@ export TZ="Europe/Kiev"
     # Затримка, щоб дати час завершити виконання ./shell.sh
     sleep 7
     
+    # Виведення відладки
+    echo "Debug: Executing operator-cli status" >&2
+    
     # Виконання operator-cli status та зчитування значення статусу
     status=$(operator-cli status | awk '/state:/ {print $2}')
+    
+    # Виведення відладки
+    echo "Debug: Got status: $status" >&2
     
     # Затримка для забезпечення додаткового часу на отримання статусу
     sleep 7
@@ -37,4 +43,4 @@ export TZ="Europe/Kiev"
         # Запис виконання команди у файл LogAutoRestart.txt разом з датою та часом
         echo "$datetime Restarted Sharduem" >> "$HOME/AutoRestartShardeum/LogAutoRestart.txt"
     fi
-} &> /dev/null
+} &>> "$HOME/AutoRestartShardeum/debug.log"  # Перенаправлення стандартного виведення та помилок в файл debug.log
