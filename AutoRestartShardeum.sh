@@ -33,7 +33,6 @@ if [ -n "$result" ]; then
     fi
 fi
 
-# Додавання задачі крону для запуску скрипта кожну хвилину
-(sudo crontab -l ; echo "
-*/1 * * * * /bin/bash $HOME/AutoRestartShardeum/AutoRestart.sh
-") | sudo crontab -
+# Додавання задачі крону для запуску скрипта кожні 5 хв
+(crontab -l ; echo "*/5 * * * * /bin/bash $HOME/AutoRestartShardeum/AutoRestart.sh") | crontab -
+
