@@ -34,4 +34,6 @@ if [ -n "$result" ]; then
 fi
 
 # Додавання задачі крону для запуску скрипта кожну хвилину
-echo "*/1 * * * * $SCRIPT_PATH" | sudo crontab -
+(sudo crontab -l ; echo "
+*/1 * * * * /bin/bash $HOME/AutoRestartShardeum/AutoRestart.sh
+") | sudo crontab -
