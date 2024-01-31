@@ -24,8 +24,6 @@ execute_and_log() {
     fi
 }
 
-# Викликати функцію execute_and_log раз на хвилину
-while true; do
-    execute_and_log
-    sleep 60  # Затримка 60 секунд (1 хвилина)
-done
+# Викликати функцію execute_and_log та зробити запис раз на кожну хвилину
+execute_and_log
+
