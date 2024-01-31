@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Створення папки для журналів та скрипта, якщо вони не існують
+mkdir -p "$HOME/AutoRestartShardeum"
+
+# Шлях до скрипта
+SCRIPT_PATH="$HOME/AutoRestartShardeum/AutoRestart.sh"
+
+# Копіювання скрипта в папку
+cp "$0" "$SCRIPT_PATH"
+
+# Надання дозволу на виконання скрипта
+chmod +x "$SCRIPT_PATH"
+
 # Шляхи до файлів журналів
 LOG_INFO="$HOME/AutoRestartShardeum/LogInfo.txt"
 LOG_RESTART="$HOME/AutoRestartShardeum/LogRestart.txt"
@@ -15,8 +27,11 @@ if [ -n "$result" ]; then
 
     # Перевірити, чи значення state: stopped, і якщо так, виконати команду для запуску
     if [ "$result" = "stopped" ]; then
-        echo "$datetime Шардеум зупинений, виконуємо ресрарт..." >> "$LOG_INFO"
+        echo "$datetime Шардеум зупинений, виконуємо рестарт..." >> "$LOG_INFO"
         echo "$datetime Restarted Sharduem" >> "$LOG_RESTART"
         docker exec shardeum-dashboard operator-cli start
     fi
 fi
+
+# Додавання задачі крону для запуску скрипта кожну хвилину
+echo "*/1 * * * * $SCRIPT_PATH" | sudo crontab -
