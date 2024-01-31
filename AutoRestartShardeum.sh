@@ -24,5 +24,8 @@ execute_and_log() {
     fi
 }
 
-# Викликати функцію execute_and_log
-execute_and_log
+# Викликати функцію execute_and_log з затримкою 3 секунди
+while true; do
+    execute_and_log
+    sleep 3
+done
